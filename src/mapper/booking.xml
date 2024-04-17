@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 配置Mabatis映射文件 -->
+<mapper namespace="com.dao.BookingDAO">
+	<resultMap type="booking" id="bookingMap">
+		<id property="bookingid" column="bookingid" />
+		<result property="bno" column="bno" />
+		<result property="cate" column="cate" />
+		<result property="reason" column="reason" />
+		<result property="total" column="total" />
+		<result property="addtime" column="addtime" />
+	</resultMap>
+	<!-- 插入语句 DAO通过id调用此配置 -->
+	<insert id="insertBooking" parameterType="booking">  
+		insert into booking(bookingid  , bno  , cate  , reason  , total  , addtime ) values(#{bookingid}  , #{bno}   , #{cate}   , #{reason}   , #{total}   , #{addtime} )
+	</insert>
+	<!-- 更新语句 DAO通过id调用此配置 -->
+		<update id="updateBooking" parameterType="booking">
+update booking set  bno=#{bno}  , cate=#{cate}  , reason=#{reason}  , total=#{total}  , addtime=#{addtime}  where bookingid=#{bookingid}
+	</update>
+	<!-- 按主键删除 DAO通过id调用此配置 -->
+	<delete id="deleteBooking" parameterType="String">
+		delete from booking where bookingid = #{bookingid}
+	</delete>
+	<!-- 查询全部信息 DAO通过id调用此配置  -->
+	<select id="getAllBooking" resultMap="bookingMap">
+select a.*  from booking a  where 1=1  order by bookingid desc
+	</select>
+
+	<!-- 按主键查询 DAO通过id调用此配置  -->
+	<select id="getBookingById" parameterType="String" resultMap="bookingMap">
+select a.*  from booking a  where 1=1 and bookingid=#{bookingid} order by bookingid desc
+	</select>
+	<!-- 按条件精确查询 DAO通过id调用此配置  -->
+	<select id="getBookingByCond" parameterType="booking" resultMap="bookingMap">
+select a.*  from booking a  where 1=1 
+		<if test="bno != null and '' != bno">
+			and a.bno = #{bno}  
+		</if>
+		<if test="cate != null and '' != cate">
+			and a.cate = #{cate}  
+		</if>
+		<if test="reason != null and '' != reason">
+			and a.reason = #{reason}  
+		</if>
+		<if test="total != null and '' != total">
+			and a.total = #{total}  
+		</if>
+		<if test="addtime != null and '' != addtime">
+			and a.addtime = #{addtime}  
+		</if>
+	</select>
+	<!-- 按条件模糊查询 DAO通过id调用此配置  -->
+	<select id="getBookingByLike" parameterType="booking" resultMap="bookingMap">
+select a.*  from booking a  where 1=1 
+		<if test="bno != null and '' != bno">
+			and a.bno like CONCAT('%', CONCAT(#{bno}, '%'))
+		</if>
+		<if test="cate != null and '' != cate">
+			and a.cate like CONCAT('%', CONCAT(#{cate}, '%'))
+		</if>
+		<if test="reason != null and '' != reason">
+			and a.reason like CONCAT('%', CONCAT(#{reason}, '%'))
+		</if>
+		<if test="total != null and '' != total">
+			and a.total like CONCAT('%', CONCAT(#{total}, '%'))
+		</if>
+		<if test="addtime != null and '' != addtime">
+			and a.addtime like CONCAT('%', CONCAT(#{addtime}, '%'))
+		</if>
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

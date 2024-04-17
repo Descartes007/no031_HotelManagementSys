@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 配置Mabatis映射文件 -->
+<mapper namespace="com.dao.ChargeDAO">
+  <resultMap type="charge" id="chargeMap">
+    <id property="chargeid" column="chargeid" />
+    <result property="cno" column="cno" />
+    <result property="ordersid" column="ordersid" />
+    <result property="usersid" column="usersid" />
+    <result property="total" column="total" />
+    <result property="addtime" column="addtime" />
+    <result property="ordercode" column="ordercode" />
+    <result property="username" column="username" />
+  </resultMap>
+  <!-- 插入语句 DAO通过id调用此配置 -->
+  <insert id="insertCharge" parameterType="charge">
+    insert into charge(chargeid , cno , ordersid , usersid , total , addtime ) values(#{chargeid} , #{cno} , #{ordersid} , #{usersid} , #{total} , #{addtime} )
+  </insert>
+  <!-- 更新语句 DAO通过id调用此配置 -->
+  <update id="updateCharge" parameterType="charge">
+    update charge set cno=#{cno} , ordersid=#{ordersid} , usersid=#{usersid} , total=#{total} , addtime=#{addtime} where chargeid=#{chargeid}
+  </update>
+  <!-- 按主键删除 DAO通过id调用此配置 -->
+  <delete id="deleteCharge" parameterType="String">
+    delete from charge where chargeid = #{chargeid}
+  </delete>
+  <!-- 查询全部信息 DAO通过id调用此配置 -->
+  <select id="getAllCharge" resultMap="chargeMap">
+    select a.* , b.ordercode , c.username from charge a , orders b , users c where a.ordersid = b.ordersid and a.usersid = c.usersid order by chargeid desc
+  </select>
+
+  <!-- 按主键查询 DAO通过id调用此配置 -->
+  <select id="getChargeById" parameterType="String" resultMap="chargeMap">
+    select a.* , b.ordercode , c.username from charge a , orders b , users c where a.ordersid = b.ordersid and a.usersid = c.usersid and chargeid=#{chargeid} order by
+    chargeid desc
+  </select>
+  <!-- 按条件精确查询 DAO通过id调用此配置 -->
+  <select id="getChargeByCond" parameterType="charge" resultMap="chargeMap">
+    select a.* , b.ordercode , c.username from charge a , orders b , users c where a.ordersid = b.ordersid and a.usersid = c.usersid
+    <if test="cno != null and '' != cno">
+      and a.cno = #{cno}
+    </if>
+    <if test="ordersid != null and '' != ordersid">
+      and a.ordersid = #{ordersid}
+    </if>
+    <if test="usersid != null and '' != usersid">
+      and a.usersid = #{usersid}
+    </if>
+    <if test="total != null and '' != total">
+      and a.total = #{total}
+    </if>
+    <if test="addtime != null and '' != addtime">
+      and a.addtime = #{addtime}
+    </if>
+  </select>
+  <!-- 按条件模糊查询 DAO通过id调用此配置 -->
+  <select id="getChargeByLike" parameterType="charge" resultMap="chargeMap">
+    select a.* , b.ordercode , c.username from charge a , orders b , users c where a.ordersid = b.ordersid and a.usersid = c.usersid
+    <if test="cno != null and '' != cno">
+      and a.cno like CONCAT('%', CONCAT(#{cno}, '%'))
+    </if>
+    <if test="ordersid != null and '' != ordersid">
+      and b.ordercode like CONCAT('%', CONCAT(#{ordersid}, '%'))
+    </if>
+    <if test="usersid != null and '' != usersid">
+      and c.username like CONCAT('%', CONCAT(#{usersid}, '%'))
+    </if>
+    <if test="total != null and '' != total">
+      and a.total like CONCAT('%', CONCAT(#{total}, '%'))
+    </if>
+    <if test="addtime != null and '' != addtime">
+      and a.addtime like CONCAT('%', CONCAT(#{addtime}, '%'))
+    </if>
+  </select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias alias="admin" type="com.entity.Admin" />
+		<typeAlias alias="users" type="com.entity.Users" />
+		<typeAlias alias="employ" type="com.entity.Employ" />
+		<typeAlias alias="article" type="com.entity.Article" />
+		<typeAlias alias="tabx" type="com.entity.Tabx" />
+		<typeAlias alias="cate" type="com.entity.Cate" />
+		<typeAlias alias="foods" type="com.entity.Foods" />
+		<typeAlias alias="cart" type="com.entity.Cart" />
+		<typeAlias alias="orders" type="com.entity.Orders" />
+		<typeAlias alias="details" type="com.entity.Details" />
+		<typeAlias alias="topic" type="com.entity.Topic" />
+		<typeAlias alias="charge" type="com.entity.Charge" />
+		<typeAlias alias="complains" type="com.entity.Complains" />
+		<typeAlias alias="rooms" type="com.entity.Rooms" />
+		<typeAlias alias="roomorders" type="com.entity.Roomorders" />
+		<typeAlias alias="hist" type="com.entity.Hist" />
+		<typeAlias alias="buy" type="com.entity.Buy" />
+		<typeAlias alias="booking" type="com.entity.Booking" />
+		<typeAlias alias="needs" type="com.entity.Needs" />
+	</typeAliases>
+	<mappers>
+		<mapper resource="mapper/admin.xml" />
+		<mapper resource="mapper/users.xml" />
+		<mapper resource="mapper/employ.xml" />
+		<mapper resource="mapper/article.xml" />
+		<mapper resource="mapper/tabx.xml" />
+		<mapper resource="mapper/cate.xml" />
+		<mapper resource="mapper/foods.xml" />
+		<mapper resource="mapper/cart.xml" />
+		<mapper resource="mapper/orders.xml" />
+		<mapper resource="mapper/details.xml" />
+		<mapper resource="mapper/topic.xml" />
+		<mapper resource="mapper/charge.xml" />
+		<mapper resource="mapper/complains.xml" />
+		<mapper resource="mapper/rooms.xml" />
+		<mapper resource="mapper/roomorders.xml" />
+		<mapper resource="mapper/hist.xml" />
+		<mapper resource="mapper/buy.xml" />
+		<mapper resource="mapper/booking.xml" />
+		<mapper resource="mapper/needs.xml" />
+	</mappers>
+</configuration>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

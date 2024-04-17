@@ -1,0 +1,60 @@
+.container, .container * {
+	margin: 0;
+	padding: 0;
+}
+
+.container {
+	width: 1200px;
+	height: 310px;
+	overflow: hidden;
+	position: relative;
+}
+
+.slider {
+	position: absolute;
+}
+
+.slider li {
+	list-style: none;
+	display: inline;
+}
+
+.slider img {
+	width: 1200px;
+	height: 310px;
+	display: block;
+}
+
+.slider2 {
+	width: 2000px;
+}
+
+.slider2 li {
+	float: left;
+}
+
+.num {
+	position: absolute;
+	right: 5px;
+	bottom: 5px;
+}
+
+.num li {
+	float: left;
+	width: 20px;
+	height: 20px;
+	overflow: hidden;
+	font-size: 12px;
+	cursor: pointer;
+	background-color: #8c8c8c;
+	margin-right: 10px;
+	border-radius: 10px;
+	font-family: "arial";
+	color: #fff;
+	line-height: 20px;
+	text-align: center;
+}
+
+.num li.on {
+	background-color: #ff2832;
+}

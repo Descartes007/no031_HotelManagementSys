@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 配置Mabatis映射文件 -->
+<mapper namespace="com.dao.NeedsDAO">
+	<resultMap type="needs" id="needsMap">
+		<id property="needsid" column="needsid" />
+		<result property="roomordersid" column="roomordersid" />
+		<result property="roomsid" column="roomsid" />
+		<result property="usersid" column="usersid" />
+		<result property="goodsname" column="goodsname" />
+		<result property="addtime" column="addtime" />
+		<result property="status" column="status" />
+		<result property="reps" column="reps" />
+		<result property="ordercode" column="ordercode" />
+		<result property="roomsno" column="roomsno" />
+		<result property="username" column="username" />
+	</resultMap>
+	<!-- 插入语句 DAO通过id调用此配置 -->
+	<insert id="insertNeeds" parameterType="needs">  
+		insert into needs(needsid  , roomordersid  , roomsid  , usersid  , goodsname  , addtime  , status  , reps ) values(#{needsid}  , #{roomordersid}   , #{roomsid}   , #{usersid}   , #{goodsname}   , #{addtime}   , #{status}   , #{reps} )
+	</insert>
+	<!-- 更新语句 DAO通过id调用此配置 -->
+		<update id="updateNeeds" parameterType="needs">
+update needs set  roomordersid=#{roomordersid}  , roomsid=#{roomsid}  , usersid=#{usersid}  , goodsname=#{goodsname}  , addtime=#{addtime}  , status=#{status}  , reps=#{reps}  where needsid=#{needsid}
+	</update>
+	<!-- 按主键删除 DAO通过id调用此配置 -->
+	<delete id="deleteNeeds" parameterType="String">
+		delete from needs where needsid = #{needsid}
+	</delete>
+	<!-- 查询全部信息 DAO通过id调用此配置  -->
+	<select id="getAllNeeds" resultMap="needsMap">
+select a.* , b.ordercode , c.roomsno , d.username  from needs a , roomorders b , rooms c , users d  where 1=1 and a.roomordersid = b.roomordersid and a.roomsid = c.roomsid and a.usersid = d.usersid  order by needsid desc
+	</select>
+
+	<!-- 按主键查询 DAO通过id调用此配置  -->
+	<select id="getNeedsById" parameterType="String" resultMap="needsMap">
+select a.* , b.ordercode , c.roomsno , d.username  from needs a , roomorders b , rooms c , users d  where 1=1 and a.roomordersid = b.roomordersid and a.roomsid = c.roomsid and a.usersid = d.usersid and needsid=#{needsid} order by needsid desc
+	</select>
+	<!-- 按条件精确查询 DAO通过id调用此配置  -->
+	<select id="getNeedsByCond" parameterType="needs" resultMap="needsMap">
+select a.* , b.ordercode , c.roomsno , d.username  from needs a , roomorders b , rooms c , users d  where 1=1 and a.roomordersid = b.roomordersid and a.roomsid = c.roomsid and a.usersid = d.usersid 
+		<if test="roomordersid != null and '' != roomordersid">
+			and a.roomordersid = #{roomordersid}  
+		</if>
+		<if test="roomsid != null and '' != roomsid">
+			and a.roomsid = #{roomsid}  
+		</if>
+		<if test="usersid != null and '' != usersid">
+			and a.usersid = #{usersid}  
+		</if>
+		<if test="goodsname != null and '' != goodsname">
+			and a.goodsname = #{goodsname}  
+		</if>
+		<if test="addtime != null and '' != addtime">
+			and a.addtime = #{addtime}  
+		</if>
+		<if test="status != null and '' != status">
+			and a.status = #{status}  
+		</if>
+		<if test="reps != null and '' != reps">
+			and a.reps = #{reps}  
+		</if>
+	</select>
+	<!-- 按条件模糊查询 DAO通过id调用此配置  -->
+	<select id="getNeedsByLike" parameterType="needs" resultMap="needsMap">
+select a.* , b.ordercode , c.roomsno , d.username  from needs a , roomorders b , rooms c , users d  where 1=1 and a.roomordersid = b.roomordersid and a.roomsid = c.roomsid and a.usersid = d.usersid 
+		<if test="roomordersid != null and '' != roomordersid">
+			and b.ordercode like CONCAT('%', CONCAT(#{roomordersid}, '%'))
+		</if>
+		<if test="roomsid != null and '' != roomsid">
+			and c.roomsno like CONCAT('%', CONCAT(#{roomsid}, '%'))
+		</if>
+		<if test="usersid != null and '' != usersid">
+			and d.username like CONCAT('%', CONCAT(#{usersid}, '%'))
+		</if>
+		<if test="goodsname != null and '' != goodsname">
+			and a.goodsname like CONCAT('%', CONCAT(#{goodsname}, '%'))
+		</if>
+		<if test="addtime != null and '' != addtime">
+			and a.addtime like CONCAT('%', CONCAT(#{addtime}, '%'))
+		</if>
+		<if test="status != null and '' != status">
+			and a.status like CONCAT('%', CONCAT(#{status}, '%'))
+		</if>
+		<if test="reps != null and '' != reps">
+			and a.reps like CONCAT('%', CONCAT(#{reps}, '%'))
+		</if>
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

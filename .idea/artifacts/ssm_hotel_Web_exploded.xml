@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="ssm_hotel:Web exploded">
+    <output-path>$PROJECT_DIR$/classes/artifacts/ssm_hotel_Web_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="ssm_hotel/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="ssm_hotel" />
+        </element>
+        <element id="directory" name="lib" />
+      </element>
+    </root>
+  </artifact>
+</component>

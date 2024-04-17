@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 配置Mabatis映射文件 -->
+<mapper namespace="com.dao.DetailsDAO">
+  <resultMap type="details" id="detailsMap">
+    <id property="detailsid" column="detailsid" />
+    <result property="ordersid" column="ordersid" />
+    <result property="foodsid" column="foodsid" />
+    <result property="price" column="price" />
+    <result property="num" column="num" />
+    <result property="memo" column="memo" />
+    <result property="ordercode" column="ordercode" />
+    <result property="foodsname" column="foodsname" />
+  </resultMap>
+  <!-- 插入语句 DAO通过id调用此配置 -->
+  <insert id="insertDetails" parameterType="details">
+    insert into details(detailsid , ordersid , foodsid , price , num , memo ) values(#{detailsid} , #{ordersid} , #{foodsid} , #{price} , #{num} , #{memo} )
+  </insert>
+  <!-- 更新语句 DAO通过id调用此配置 -->
+  <update id="updateDetails" parameterType="details">
+    update details set ordersid=#{ordersid} , foodsid=#{foodsid} , price=#{price} , num=#{num} , memo=#{memo} where detailsid=#{detailsid}
+  </update>
+  <!-- 按主键删除 DAO通过id调用此配置 -->
+  <delete id="deleteDetails" parameterType="String">
+    delete from details where detailsid = #{detailsid}
+  </delete>
+  <!-- 查询全部信息 DAO通过id调用此配置 -->
+  <select id="getAllDetails" resultMap="detailsMap">
+    select a.* , b.ordercode , c.foodsname from details a , orders b , foods c where a.ordersid = b.ordersid and a.foodsid = c.foodsid order by detailsid desc
+  </select>
+
+  <!-- 按主键查询 DAO通过id调用此配置 -->
+  <select id="getDetailsById" parameterType="String" resultMap="detailsMap">
+    select a.* , b.ordercode , c.foodsname from details a , orders b , foods c where a.ordersid = b.ordersid and a.foodsid = c.foodsid and detailsid=#{detailsid} order
+    by detailsid desc
+  </select>
+  <!-- 按条件精确查询 DAO通过id调用此配置 -->
+  <select id="getDetailsByCond" parameterType="details" resultMap="detailsMap">
+    select a.* , b.ordercode , c.foodsname from details a , orders b , foods c where a.ordersid = b.ordersid and a.foodsid = c.foodsid
+    <if test="ordersid != null and '' != ordersid">
+      and a.ordersid = #{ordersid}
+    </if>
+    <if test="foodsid != null and '' != foodsid">
+      and a.foodsid = #{foodsid}
+    </if>
+    <if test="price != null and '' != price">
+      and a.price = #{price}
+    </if>
+    <if test="num != null and '' != num">
+      and a.num = #{num}
+    </if>
+    <if test="memo != null and '' != memo">
+      and a.memo = #{memo}
+    </if>
+  </select>
+  <!-- 按条件模糊查询 DAO通过id调用此配置 -->
+  <select id="getDetailsByLike" parameterType="details" resultMap="detailsMap">
+    select a.* , b.ordercode , c.foodsname from details a , orders b , foods c where a.ordersid = b.ordersid and a.foodsid = c.foodsid
+    <if test="ordersid != null and '' != ordersid">
+      and b.ordercode like CONCAT('%', CONCAT(#{ordersid}, '%'))
+    </if>
+    <if test="foodsid != null and '' != foodsid">
+      and c.foodsname like CONCAT('%', CONCAT(#{foodsid}, '%'))
+    </if>
+    <if test="price != null and '' != price">
+      and a.price like CONCAT('%', CONCAT(#{price}, '%'))
+    </if>
+    <if test="num != null and '' != num">
+      and a.num like CONCAT('%', CONCAT(#{num}, '%'))
+    </if>
+    <if test="memo != null and '' != memo">
+      and a.memo like CONCAT('%', CONCAT(#{memo}, '%'))
+    </if>
+  </select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

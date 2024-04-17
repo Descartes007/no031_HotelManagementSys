@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 配置Mabatis映射文件 -->
+<mapper namespace="com.dao.TabxDAO">
+  <resultMap type="tabx" id="tabxMap">
+    <id property="tabxid" column="tabxid" />
+    <result property="tabxname" column="tabxname" />
+    <result property="image" column="image" />
+    <result property="num" column="num" />
+    <result property="cate" column="cate" />
+    <result property="place" column="place" />
+    <result property="addtime" column="addtime" />
+    <result property="contents" column="contents" />
+  </resultMap>
+  <!-- 插入语句 DAO通过id调用此配置 -->
+  <insert id="insertTabx" parameterType="tabx">
+    insert into tabx(tabxid , tabxname , image , num , cate , place , addtime , contents ) values(#{tabxid} ,
+    #{tabxname} , #{image} , #{num} , #{cate} , #{place} ,
+    #{addtime} , #{contents} )
+  </insert>
+  <!-- 更新语句 DAO通过id调用此配置 -->
+  <update id="updateTabx" parameterType="tabx">
+    update tabx set tabxname=#{tabxname} , image=#{image} , num=#{num} , cate=#{cate} , place=#{place} ,
+    addtime=#{addtime} , contents=#{contents} where
+    tabxid=#{tabxid}
+  </update>
+  <!-- 按主键删除 DAO通过id调用此配置 -->
+  <delete id="deleteTabx" parameterType="String">
+    delete from tabx where tabxid = #{tabxid}
+  </delete>
+  <!-- 查询全部信息 DAO通过id调用此配置 -->
+  <select id="getAllTabx" resultMap="tabxMap">
+    select a.* from tabx a order by tabxid desc
+  </select>
+  
+   <select id="getFrontTabx" resultMap="tabxMap">
+    select a.* from tabx a order by tabxid desc limit 5
+  </select>
+
+  <!-- 按主键查询 DAO通过id调用此配置 -->
+  <select id="getTabxById" parameterType="String" resultMap="tabxMap">
+    select a.* from tabx a where tabxid=#{tabxid} order by tabxid desc
+  </select>
+  <!-- 按条件精确查询 DAO通过id调用此配置 -->
+  <select id="getTabxByCond" parameterType="tabx" resultMap="tabxMap">
+    select a.* from tabx a where 1=1
+    <if test="tabxname != null and '' != tabxname">
+      and a.tabxname = #{tabxname}
+    </if>
+    <if test="image != null and '' != image">
+      and a.image = #{image}
+    </if>
+    <if test="num != null and '' != num">
+      and a.num = #{num}
+    </if>
+    <if test="cate != null and '' != cate">
+      and a.cate = #{cate}
+    </if>
+    <if test="place != null and '' != place">
+      and a.place = #{place}
+    </if>
+    <if test="addtime != null and '' != addtime">
+      and a.addtime = #{addtime}
+    </if>
+    <if test="contents != null and '' != contents">
+      and a.contents = #{contents}
+    </if>
+  </select>
+  <!-- 按条件模糊查询 DAO通过id调用此配置 -->
+  <select id="getTabxByLike" parameterType="tabx" resultMap="tabxMap">
+    select a.* from tabx a where 1=1
+    <if test="tabxname != null and '' != tabxname">
+      and a.tabxname like CONCAT('%', CONCAT(#{tabxname}, '%'))
+    </if>
+    <if test="image != null and '' != image">
+      and a.image like CONCAT('%', CONCAT(#{image}, '%'))
+    </if>
+    <if test="num != null and '' != num">
+      and a.num like CONCAT('%', CONCAT(#{num}, '%'))
+    </if>
+    <if test="cate != null and '' != cate">
+      and a.cate like CONCAT('%', CONCAT(#{cate}, '%'))
+    </if>
+    <if test="place != null and '' != place">
+      and a.place like CONCAT('%', CONCAT(#{place}, '%'))
+    </if>
+    <if test="addtime != null and '' != addtime">
+      and a.addtime like CONCAT('%', CONCAT(#{addtime}, '%'))
+    </if>
+    <if test="contents != null and '' != contents">
+      and a.contents like CONCAT('%', CONCAT(#{contents}, '%'))
+    </if>
+  </select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

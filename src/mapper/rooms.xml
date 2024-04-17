@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 配置Mabatis映射文件 -->
+<mapper namespace="com.dao.RoomsDAO">
+	<resultMap type="rooms" id="roomsMap">
+		<id property="roomsid" column="roomsid" />
+		<result property="roomsno" column="roomsno" />
+		<result property="cate" column="cate" />
+		<result property="image" column="image" />
+		<result property="price" column="price" />
+		<result property="mianji" column="mianji" />
+		<result property="chaoxiang" column="chaoxiang" />
+		<result property="status" column="status" />
+		<result property="hits" column="hits" />
+		<result property="contents" column="contents" />
+	</resultMap>
+	<!-- 插入语句 DAO通过id调用此配置 -->
+	<insert id="insertRooms" parameterType="rooms">
+		insert into rooms(roomsid , roomsno , cate , image , price , mianji , chaoxiang , status , hits , contents )
+		values(#{roomsid} , #{roomsno} , #{cate} , #{image} ,
+		#{price} , #{mianji} , #{chaoxiang} , #{status} , #{hits} , #{contents} )
+	</insert>
+	<!-- 更新语句 DAO通过id调用此配置 -->
+	<update id="updateRooms" parameterType="rooms">
+		update rooms set roomsno=#{roomsno} , cate=#{cate} , image=#{image} , price=#{price} , mianji=#{mianji} ,
+		chaoxiang=#{chaoxiang} , status=#{status} , hits=#{hits} ,
+		contents=#{contents} where roomsid=#{roomsid}
+	</update>
+	<!-- 按主键删除 DAO通过id调用此配置 -->
+	<delete id="deleteRooms" parameterType="String">
+		delete from rooms where roomsid = #{roomsid}
+	</delete>
+	<!-- 查询全部信息 DAO通过id调用此配置 -->
+	<select id="getAllRooms" resultMap="roomsMap">
+		select a.* from rooms a order by roomsid desc
+	</select>
+
+	<select id="getFrontRooms" resultMap="roomsMap">
+		select a.* from rooms a order by roomsid desc limit 5
+	</select>
+	<!-- 按主键查询 DAO通过id调用此配置 -->
+	<select id="getRoomsById" parameterType="String" resultMap="roomsMap">
+		select a.* from rooms a where 1=1 and roomsid=#{roomsid} order by roomsid desc
+	</select>
+	<!-- 按条件精确查询 DAO通过id调用此配置 -->
+	<select id="getRoomsByCond" parameterType="rooms" resultMap="roomsMap">
+		select a.* from rooms a where 1=1
+		<if test="roomsno != null and '' != roomsno">
+			and a.roomsno = #{roomsno}
+		</if>
+		<if test="cate != null and '' != cate">
+			and a.cate = #{cate}
+		</if>
+		<if test="image != null and '' != image">
+			and a.image = #{image}
+		</if>
+		<if test="price != null and '' != price">
+			and a.price = #{price}
+		</if>
+		<if test="mianji != null and '' != mianji">
+			and a.mianji = #{mianji}
+		</if>
+		<if test="chaoxiang != null and '' != chaoxiang">
+			and a.chaoxiang = #{chaoxiang}
+		</if>
+		<if test="status != null and '' != status">
+			and a.status = #{status}
+		</if>
+		<if test="hits != null and '' != hits">
+			and a.hits = #{hits}
+		</if>
+		<if test="contents != null and '' != contents">
+			and a.contents = #{contents}
+		</if>
+	</select>
+	<!-- 按条件模糊查询 DAO通过id调用此配置 -->
+	<select id="getRoomsByLike" parameterType="rooms" resultMap="roomsMap">
+		select a.* from rooms a where 1=1
+		<if test="roomsno != null and '' != roomsno">
+			and a.roomsno like CONCAT('%', CONCAT(#{roomsno}, '%'))
+		</if>
+		<if test="cate != null and '' != cate">
+			and a.cate like CONCAT('%', CONCAT(#{cate}, '%'))
+		</if>
+		<if test="image != null and '' != image">
+			and a.image like CONCAT('%', CONCAT(#{image}, '%'))
+		</if>
+		<if test="price != null and '' != price">
+			and a.price like CONCAT('%', CONCAT(#{price}, '%'))
+		</if>
+		<if test="mianji != null and '' != mianji">
+			and a.mianji like CONCAT('%', CONCAT(#{mianji}, '%'))
+		</if>
+		<if test="chaoxiang != null and '' != chaoxiang">
+			and a.chaoxiang like CONCAT('%', CONCAT(#{chaoxiang}, '%'))
+		</if>
+		<if test="status != null and '' != status">
+			and a.status like CONCAT('%', CONCAT(#{status}, '%'))
+		</if>
+		<if test="hits != null and '' != hits">
+			and a.hits like CONCAT('%', CONCAT(#{hits}, '%'))
+		</if>
+		<if test="contents != null and '' != contents">
+			and a.contents like CONCAT('%', CONCAT(#{contents}, '%'))
+		</if>
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

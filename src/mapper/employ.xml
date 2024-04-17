@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 配置Mabatis映射文件 -->
+<mapper namespace="com.dao.EmployDAO">
+	<resultMap type="employ" id="employMap">
+		<id property="employid" column="employid" />
+		<result property="eno" column="eno" />
+		<result property="password" column="password" />
+		<result property="employname" column="employname" />
+		<result property="sex" column="sex" />
+		<result property="birthday" column="birthday" />
+		<result property="jiguan" column="jiguan" />
+		<result property="idcard" column="idcard" />
+		<result property="salary" column="salary" />
+		<result property="contact" column="contact" />
+		<result property="status" column="status" />
+		<result property="addtime" column="addtime" />
+	</resultMap>
+	<!-- 插入语句 DAO通过id调用此配置 -->
+	<insert id="insertEmploy" parameterType="employ">
+		insert into employ(employid , eno , password , employname , sex , birthday , jiguan , idcard , salary , contact , status , addtime ) values(#{employid} , #{eno} ,
+		#{password} , #{employname} , #{sex} , #{birthday} , #{jiguan} , #{idcard} , #{salary} , #{contact} , #{status} , #{addtime} )
+	</insert>
+	<!-- 更新语句 DAO通过id调用此配置 -->
+	<update id="updateEmploy" parameterType="employ">
+		update employ set eno=#{eno} , password=#{password} , employname=#{employname} , sex=#{sex} , birthday=#{birthday} , jiguan=#{jiguan} , idcard=#{idcard} , salary=#{salary} ,
+		contact=#{contact} , status=#{status} , addtime=#{addtime} where employid=#{employid}
+	</update>
+	<!-- 按主键删除 DAO通过id调用此配置 -->
+	<delete id="deleteEmploy" parameterType="String">
+		delete from employ where employid = #{employid}
+	</delete>
+	<!-- 查询全部信息 DAO通过id调用此配置 -->
+	<select id="getAllEmploy" resultMap="employMap">
+		select a.* from employ a order by employid desc
+	</select>
+
+	<!-- 按主键查询 DAO通过id调用此配置 -->
+	<select id="getEmployById" parameterType="String" resultMap="employMap">
+		select a.* from employ a where employid=#{employid} order by employid desc
+	</select>
+	<!-- 按条件精确查询 DAO通过id调用此配置 -->
+	<select id="getEmployByCond" parameterType="employ" resultMap="employMap">
+		select a.* from employ a where 1=1
+		<if test="eno != null and '' != eno">
+			and a.eno = #{eno}
+		</if>
+		<if test="employname != null and '' != employname">
+			and a.employname = #{employname}
+		</if>
+		<if test="sex != null and '' != sex">
+			and a.sex = #{sex}
+		</if>
+		<if test="birthday != null and '' != birthday">
+			and a.birthday = #{birthday}
+		</if>
+		<if test="jiguan != null and '' != jiguan">
+			and a.jiguan = #{jiguan}
+		</if>
+		<if test="idcard != null and '' != idcard">
+			and a.idcard = #{idcard}
+		</if>
+		<if test="salary != null and '' != salary">
+			and a.salary = #{salary}
+		</if>
+		<if test="contact != null and '' != contact">
+			and a.contact = #{contact}
+		</if>
+		<if test="status != null and '' != status">
+			and a.status = #{status}
+		</if>
+		<if test="addtime != null and '' != addtime">
+			and a.addtime = #{addtime}
+		</if>
+	</select>
+	<!-- 按条件模糊查询 DAO通过id调用此配置 -->
+	<select id="getEmployByLike" parameterType="employ" resultMap="employMap">
+		select a.* from employ a where 1=1
+		<if test="eno != null and '' != eno">
+			and a.eno like CONCAT('%', CONCAT(#{eno}, '%'))
+		</if>
+		<if test="employname != null and '' != employname">
+			and a.employname like CONCAT('%', CONCAT(#{employname}, '%'))
+		</if>
+		<if test="sex != null and '' != sex">
+			and a.sex like CONCAT('%', CONCAT(#{sex}, '%'))
+		</if>
+		<if test="birthday != null and '' != birthday">
+			and a.birthday like CONCAT('%', CONCAT(#{birthday}, '%'))
+		</if>
+		<if test="jiguan != null and '' != jiguan">
+			and a.jiguan like CONCAT('%', CONCAT(#{jiguan}, '%'))
+		</if>
+		<if test="idcard != null and '' != idcard">
+			and a.idcard like CONCAT('%', CONCAT(#{idcard}, '%'))
+		</if>
+		<if test="salary != null and '' != salary">
+			and a.salary like CONCAT('%', CONCAT(#{salary}, '%'))
+		</if>
+		<if test="contact != null and '' != contact">
+			and a.contact like CONCAT('%', CONCAT(#{contact}, '%'))
+		</if>
+		<if test="status != null and '' != status">
+			and a.status like CONCAT('%', CONCAT(#{status}, '%'))
+		</if>
+		<if test="addtime != null and '' != addtime">
+			and a.addtime like CONCAT('%', CONCAT(#{addtime}, '%'))
+		</if>
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
